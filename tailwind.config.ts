@@ -41,6 +41,12 @@ const config: Config = {
         panel: "28px",
         card: "20px",
         control: "12px",
+        /*
+         * Pills (badges, arena IDs, stat captions) are used with `rounded-pill`
+         * across a dozen components. Without this entry the class emits no CSS
+         * at all and every pill renders as a sharp-cornered rectangle.
+         */
+        pill: "9999px",
       },
       fontSize: {
         mono: ["0.6875rem", { lineHeight: "1rem" }],
