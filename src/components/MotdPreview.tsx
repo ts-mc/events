@@ -77,7 +77,7 @@ export function MotdPreview() {
         <p className="relative whitespace-pre">      <strong className="bg-gradient-to-r from-[#4cadd0] to-[#b2f9ff] bg-clip-text text-transparent">TheySix Events</strong> <span className="text-[#aaaaaa]">&gt;&gt;</span> <span className="text-white">{current.top.split("  >>  ")[1].split("  [")[0]}</span> <span className="text-[#aaaaaa]">[</span><span className="text-white">1.21.11+</span><span className="text-[#aaaaaa]">]</span></p>
         <p className="relative whitespace-pre">{current.offset}<strong>{current.games.map((game, gameIndex) => <span key={game} className="bg-gradient-to-r bg-clip-text text-transparent" style={{ backgroundImage: `linear-gradient(90deg, ${colors[gameIndex]}, ${colors[gameIndex + 1] ?? colors[gameIndex]})` }}>{gameIndex ? `• ${game} ` : `${game} `}</span>)}</strong></p>
       </div>
-      <p className="label-mono mt-5 text-ink-muted">MiniMessage configuration · changes every 7 seconds</p>
+      <p className="label-mono mt-5 text-ink-muted">Server list preview · changes every 7 seconds</p>
     </div>
   );
 }
