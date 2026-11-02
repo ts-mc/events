@@ -22,6 +22,7 @@ import {
   TextLink,
 } from "@/components/Primitives";
 import { LiveStatusPanel } from "@/components/LiveStatusPanel";
+import { MotdPreview } from "@/components/MotdPreview";
 import {
   ARENA_CAPACITY,
   ARENA_COUNT,
@@ -36,8 +37,6 @@ import {
   JAVA_VERSION,
   MAX_PLAYERS,
   MIN_CLIENT,
-  MOTD_PLAIN,
-  MOTD_RAW,
   SERVER_ADDRESS,
   SERVER_ADDRESS_BARE,
   SERVER_SOFTWARE,
@@ -212,18 +211,12 @@ export default function ServerPage() {
               </h2>
               <Prose>
                 <ProseP>
-                  This is what you see in your server list. It renders in-game
-                  with colours; the raw form is included so you can recognise it.
+                  This is what you see in your server list. The message rotates
+                  between game highlights, using the same gradients and spacing
+                  as the server listing.
                 </ProseP>
               </Prose>
-              <div className="mt-5 rounded-card border border-hairline bg-bg p-5">
-                <p className="label-mono text-ink-muted">Raw</p>
-                <p className="mt-3 select-all break-all rounded-control bg-bg-elev p-4 font-mono text-xs leading-relaxed text-ink-muted">
-                  {MOTD_RAW}
-                </p>
-                <p className="label-mono mt-5 text-ink-muted">Plain text</p>
-                <p className="mt-3 font-mono text-sm text-ink">{MOTD_PLAIN}</p>
-              </div>
+              <MotdPreview />
             </section>
 
             <section aria-labelledby="address">
@@ -272,9 +265,9 @@ export default function ServerPage() {
             </section>
           </div>
 
-          <aside className="border-l border-hairline pl-5 lg:sticky lg:top-8">
+          <aside className="min-w-0 border-l border-hairline pl-5 lg:sticky lg:top-8">
             <h2 className="label-mono text-brand">Quick facts</h2>
-            <dl className="mt-5 space-y-4 text-sm">
+            <dl className="mt-5 space-y-0 text-sm">
               {[
                 ["Software", `${SERVER_SOFTWARE} ${SERVER_VERSION}`],
                 ["Java", JAVA_VERSION],
@@ -291,10 +284,10 @@ export default function ServerPage() {
               ].map(([label, value]) => (
                 <div
                   key={label}
-                  className="flex items-baseline justify-between gap-4 border-b border-hairline/60 pb-3 last:border-b-0"
+                  className="grid grid-cols-[minmax(0,1fr)_minmax(0,1.25fr)] items-start gap-x-3 border-b border-hairline/60 py-3 last:border-b-0"
                 >
-                  <dt className="label-mono text-ink-muted">{label}</dt>
-                  <dd className="text-right font-mono text-xs font-bold text-ink">
+                  <dt className="label-mono min-w-0 text-ink-muted">{label}</dt>
+                  <dd className="min-w-0 break-words text-right font-mono text-xs font-bold leading-relaxed text-ink">
                     {value}
                   </dd>
                 </div>
