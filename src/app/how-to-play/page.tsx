@@ -492,7 +492,7 @@ export default function HowToPlayPage() {
               <TextLink href="/server">Version, Java requirement and features</TextLink>
             </Bullet>
             <Bullet>
-              <TextLink href="/tos">Terms of service</TextLink>
+              <TextLink href="https://wiki.theysix.tech/legal/tos">Terms of service</TextLink>
             </Bullet>
           </ProseList>
           <p className="text-sm text-ink-muted">

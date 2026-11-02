@@ -8,6 +8,13 @@ const __dirname = path.dirname(__filename);
 const nextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
+  async redirects() {
+    return [
+      { source: "/tos", destination: "https://wiki.theysix.tech/legal/tos", permanent: true },
+      { source: "/privacy", destination: "https://wiki.theysix.tech/legal/privacy", permanent: true },
+      { source: "/cookies", destination: "https://wiki.theysix.tech/legal/cookies", permanent: true },
+    ];
+  },
   webpack: (config) => {
     config.resolve.alias["@"] = path.resolve(__dirname, "src");
     return config;

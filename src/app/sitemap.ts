@@ -9,9 +9,6 @@ const ROUTES: { path: string; priority: number; changeFrequency: MetadataRoute.S
   { path: "/arenas", priority: 0.7, changeFrequency: "monthly" },
   { path: "/ranks", priority: 0.6, changeFrequency: "monthly" },
   { path: "/server", priority: 0.6, changeFrequency: "weekly" },
-  { path: "/cookies", priority: 0.3, changeFrequency: "yearly" },
-  { path: "/privacy", priority: 0.3, changeFrequency: "yearly" },
-  { path: "/tos", priority: 0.3, changeFrequency: "yearly" },
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {

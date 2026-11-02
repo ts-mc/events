@@ -11,7 +11,7 @@ const destinations: Destination[] = [
   { id: "about", href: "https://theysix.tech/about", label: "About", icon: Info },
   { id: "main", href: "https://theysix.tech", label: "Main", icon: House },
   { id: "socials", href: "https://theysix.tech/socials", label: "Socials", icon: Share2 },
-  { id: "legal", href: "/tos", label: "Legal", icon: Scale },
+  { id: "legal", href: "https://wiki.theysix.tech/legal/tos", label: "Legal", icon: Scale },
 ];
 
 const slotClass = "flex min-h-12 min-w-14 shrink-0 cursor-pointer flex-col items-center justify-center gap-1.5 rounded-lg px-2 py-2 text-ink-muted transition-colors duration-150 hover:bg-white/5 hover:text-ink sm:min-w-24";
