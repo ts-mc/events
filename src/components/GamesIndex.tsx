@@ -4,9 +4,9 @@ import { Gamepad2, LayoutGrid, Table2 } from "lucide-react";
 import { useState } from "react";
 
 import { CopyValue } from "@/components/CopyValue";
+import { GameCard } from "@/components/GameCard";
 import {
   CATEGORIES,
-  CATEGORY_BY_SLUG,
   GAMES_BY_CATEGORY,
   gameCommand,
 } from "@/data/games";
@@ -65,7 +65,7 @@ export function GamesIndex() {
               <div>
                 <h2
                   id={`cat-${category.slug}`}
-                  className="flex items-center gap-3 text-2xl font-extrabold text-ink"
+                  className="flex items-center gap-3 text-[1.35rem] font-extrabold text-ink"
                 >
                   <span
                     aria-hidden
@@ -87,46 +87,9 @@ export function GamesIndex() {
             </div>
 
             {view === "cards" ? (
-              <ul className="mt-6 grid gap-4 lg:grid-cols-2">
+              <ul className="events-index mt-6">
                 {GAMES_BY_CATEGORY[category.slug].map((game) => (
-                  <li key={game.id}>
-                    <article
-                      className="glass glass-hover card-hue flex h-full flex-col rounded-card p-6"
-                      style={{
-                        ["--card-hue" as string]: CATEGORY_BY_SLUG[game.category]
-                          .color,
-                      }}
-                    >
-                      <div className="flex flex-wrap items-start justify-between gap-3">
-                        <h3 className="text-lg font-extrabold text-ink">
-                          {game.name}
-                        </h3>
-                        <p className="label-mono text-ink-muted">
-                          {game.roundSeconds}s · {game.winCondition}
-                        </p>
-                      </div>
-
-                      <p className="mt-3 flex-1 text-sm leading-relaxed text-ink-muted">
-                        {game.description}
-                      </p>
-
-                      <div className="mt-5 flex flex-wrap items-center justify-between gap-3 border-t border-hairline pt-4">
-                        <p className="label-mono text-ink-muted">
-                          Suits{" "}
-                          <span className="text-ink-muted">
-                            {game.arenas.join(" · ")}
-                          </span>
-                        </p>
-                        <CopyValue
-                          value={gameCommand(game)}
-                          label="Copy command"
-                          copiedLabel="Copied"
-                          variant="secondary"
-                          size="sm"
-                        />
-                      </div>
-                    </article>
-                  </li>
+                  <li key={game.id}><GameCard game={game} /></li>
                 ))}
               </ul>
             ) : (

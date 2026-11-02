@@ -7,7 +7,7 @@ type Size = "sm" | "md" | "lg";
 
 export const BUTTON_VARIANTS: Record<Variant, string> = {
   primary:
-    "cta-sweep text-[#070A12] font-semibold hover:brightness-110 shadow-[0_10px_40px_-12px_rgba(76,173,208,0.45)]",
+    "bg-brand text-[#020202] font-bold hover:bg-brand-2 shadow-[0_10px_34px_-16px_rgba(153,225,217,0.55)]",
   secondary: "glass text-ink hover:bg-surface-hover hover:border-hairline-hover",
   ghost: "text-ink-muted hover:text-ink hover:bg-white/5",
 };

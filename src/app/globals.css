@@ -5,21 +5,21 @@
 @layer base {
   :root {
     /* Base — dark only, no light theme by design. */
-    --bg: #070a12;
-    --bg-base: #0b0e14;
-    --bg-elev: #111726;
-    --surface: rgba(19, 23, 34, 0.85);
-    --surface-hover: rgba(24, 29, 42, 0.95);
-    --border: #1e293b;
-    --border-hover: #334155;
-    --text: #f1f5f9;
-    --text-muted: #94a3b8;
-    --text-dim: #64748b;
+    --bg: #020202;
+    --bg-base: #020202;
+    --bg-elev: #23212c;
+    --surface: rgba(29, 29, 29, 0.82);
+    --surface-hover: rgba(35, 33, 44, 0.92);
+    --border: #23251e;
+    --border-hover: #6e735b;
+    --text: #f1fec8;
+    --text-muted: #969e7d;
+    --text-dim: #777f65;
 
     /* Brand — taken from the in-game name gradients. */
-    --brand: #4cadd0;
-    --brand-hi: #b2f9ff;
-    --brand-2: #9febf6;
+    --brand: #99e1d9;
+    --brand-hi: #b8f1e9;
+    --brand-2: #7fd3c9;
 
     /* Extended spectrum for category coding, states and glows. */
     --lime: #9fff99;
@@ -44,7 +44,7 @@
     --blurple-text: #96a0fa;
     --indigo-text: #a5a5fc;
 
-    --nav-height: 72px;
+    --nav-height: 76px;
   }
 
   * {
@@ -60,7 +60,7 @@
   body {
     background-color: var(--bg-base);
     color: var(--text);
-    font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+    font-family: "Trebuchet MS", "Lucida Sans Unicode", sans-serif;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
@@ -72,13 +72,7 @@
     position: fixed;
     inset: 0;
     z-index: -2;
-    background:
-      radial-gradient(
-        ellipse 80% 50% at 50% -10%,
-        rgba(76, 173, 208, 0.1),
-        transparent 70%
-      ),
-      var(--bg);
+    background: var(--bg);
     pointer-events: none;
   }
 
@@ -102,8 +96,8 @@
   h2,
   h3,
   h4 {
-    font-weight: 800;
-    letter-spacing: -0.03em;
+    font-weight: 900;
+    letter-spacing: -0.04em;
     text-wrap: balance;
   }
 
@@ -124,37 +118,22 @@
 }
 
 @layer components {
-  /* The brand's signature move: gradient text for the H1 and primary CTAs. */
+  /* Archive emphasis uses one solid accent, as in the wiki. */
   .text-gradient {
-    background-image: linear-gradient(
-      100deg,
-      #4cadd0 0%,
-      #9febf6 45%,
-      #b2f9ff 100%
-    );
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+    color: var(--brand);
   }
 
   .glass {
-    background: var(--surface);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: transparent;
+    border-top: 1px solid var(--border);
   }
 
   .glass-hover {
-    transition:
-      transform 200ms cubic-bezier(0.16, 1, 0.3, 1),
-      border-color 200ms ease,
-      box-shadow 200ms ease,
-      background-color 200ms ease;
+    transition: background-color 150ms ease;
   }
 
   .glass-hover:hover {
-    transform: translateY(-2px);
-    background: var(--surface-hover);
+    background: color-mix(in srgb, var(--brand) 7%, transparent);
   }
 
   /*
@@ -164,8 +143,7 @@
    */
   .card-hue:hover,
   .card-hue:focus-within {
-    border-color: color-mix(in srgb, var(--card-hue) 40%, transparent);
-    box-shadow: 0 10px 40px -12px color-mix(in srgb, var(--card-hue) 30%, transparent);
+    border-color: var(--border);
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -181,11 +159,10 @@
    * string and table header. The brand's "system voice".
    */
   .label-mono {
-    font-family: var(--font-jetbrains-mono), ui-monospace, SFMono-Regular,
-      monospace;
+    font-family: "Trebuchet MS", "Lucida Sans Unicode", sans-serif;
     text-transform: uppercase;
-    font-weight: 700;
-    letter-spacing: 0.08em;
+    font-weight: 600;
+    letter-spacing: 0.18em;
     font-size: 0.6875rem;
     line-height: 1rem;
   }
@@ -200,12 +177,88 @@
     padding-block: 0.5rem;
   }
 
+  .theysix-dock {
+    background: linear-gradient(to bottom, rgba(35, 33, 44, 0.36), rgba(2, 2, 2, 0.3));
+    border: 1px solid rgba(241, 254, 200, 0.2);
+    box-shadow: inset 0 1px rgba(241, 254, 200, 0.24), inset 0 -1px rgba(2, 2, 2, 0.24), 0 28px 70px -24px rgba(2, 2, 2, 0.86);
+    backdrop-filter: blur(26px) saturate(145%);
+    -webkit-backdrop-filter: blur(26px) saturate(145%);
+  }
+
+  .theysix-dock-home {
+    border: 1px solid rgba(153, 225, 217, 0.48);
+    background: rgba(35, 33, 44, 0.34);
+    box-shadow: inset 0 1px rgba(241, 254, 200, 0.18), 0 0 36px rgba(153, 225, 217, 0.18);
+  }
+
+  .theysix-dock a:focus-visible,
+  .theysix-dock button:focus-visible {
+    outline: 2px solid var(--brand);
+    outline-offset: 3px;
+    box-shadow: 0 0 0 3px var(--bg);
+  }
+
+  .footer-shell {
+    border-top: 1px solid var(--border);
+    background: var(--bg);
+  }
+
+  .footer-shell a { color: var(--text-muted); }
+  .footer-shell a:hover { color: var(--brand); }
+
   .shell {
     width: 100%;
-    max-width: 1200px;
+    max-width: 1180px;
     margin-inline: auto;
     padding-inline: 1.25rem;
   }
+
+  .events-archive > .events-section {
+    border: 0;
+  }
+
+  .events-archive > .events-section .shell {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+
+  .events-archive > .events-section:last-child .shell {
+    padding-bottom: 9rem;
+  }
+
+  .events-archive > .events-section section {
+    padding-top: 0;
+  }
+
+  .events-index {
+    border-top: 1px solid var(--border);
+  }
+
+  .events-index > li {
+    border-bottom: 1px solid var(--border);
+  }
+
+  .events-index > li > article,
+  .events-index > li > div {
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    background: transparent;
+    padding: 1rem .8rem;
+  }
+
+  .events-index > li p {
+    max-width: 45rem;
+  }
+
+  .events-index > li:hover {
+    background: color-mix(in srgb, var(--brand) 7%, transparent);
+  }
+
+  .rounded-panel { border-radius: 6px; }
+  .rounded-card { border-radius: 4px; }
+  .rounded-control { border-radius: 4px; }
+  .rounded-pill { border-radius: 9999px; }
 
   @media (min-width: 768px) {
     .shell {
@@ -214,12 +267,7 @@
   }
 
   .cta-sweep {
-    background-image: linear-gradient(
-      100deg,
-      #4cadd0 0%,
-      #9febf6 45%,
-      #b2f9ff 100%
-    );
+    background-image: linear-gradient(100deg, #99e1d9, #b8f1e9);
     background-size: 200% 100%;
     animation: cta-sweep 6s linear infinite;
   }
@@ -227,16 +275,31 @@
   .glow-orb {
     position: absolute;
     border-radius: 9999px;
-    filter: blur(64px);
+    filter: blur(90px);
     pointer-events: none;
     z-index: -1;
   }
 
+  .hero-field {
+    background-image: linear-gradient(110deg, rgba(2, 2, 2, 0.35), transparent 60%);
+  }
+
+  /* Carry the main TheySix portal color into links and metadata. */
+  .text-brand { color: var(--brand); }
+  .text-brand-hi { color: var(--brand-hi); }
+  .border-hairline { border-color: var(--border); }
+
   /* Scroll reveal: opacity alone is animated so reduced motion still shows it. */
   .reveal,
   [data-reveal-child] {
-    opacity: 0;
-    transform: translateY(16px);
+    opacity: 1;
+    transform: none;
+  }
+
+  .reveal-visible,
+  .reveal-visible [data-reveal-child] {
+    opacity: 1;
+    transform: none;
   }
 
   .reveal[data-visible="true"],

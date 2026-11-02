@@ -3,7 +3,6 @@ import type { Metadata } from "next";
 import { ArenaCard } from "@/components/ArenaCard";
 import { JsonLd } from "@/components/JsonLd";
 import { Callout, PageShell, PageHero } from "@/components/Primitives";
-import { Reveal } from "@/components/Reveal";
 import { ARENAS, gamesForArena } from "@/data/arenas";
 import { ARENA_CAPACITY, ARENA_COUNT, SITE_URL } from "@/data/site";
 
@@ -43,13 +42,11 @@ export default function ArenasPage() {
           <h2 id="all-arenas" className="sr-only">
             All six arenas
           </h2>
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <ul className="events-index">
             {ARENAS.map((arena) => (
-              <Reveal key={arena.id}>
-                <ArenaCard arena={arena} capacity={ARENA_CAPACITY} />
-              </Reveal>
+              <li key={arena.id}><ArenaCard arena={arena} capacity={ARENA_CAPACITY} /></li>
             ))}
-          </div>
+          </ul>
         </section>
 
         <section aria-labelledby="which-games" className="mt-16">

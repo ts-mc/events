@@ -37,10 +37,10 @@ export default function RanksPage() {
           <RankLadder />
         </Reveal>
 
-        <div className="mt-12 grid gap-6 lg:grid-cols-2">
+        <div className="mt-12 space-y-8">
           <RankStaffNote />
 
-          <div className="glass rounded-card p-6">
+          <div className="border-t border-hairline pt-5">
             <h2 className="label-mono text-brand">How to actually get one</h2>
             <ul className="mt-4 space-y-3 text-sm leading-relaxed text-ink-muted">
               <li>

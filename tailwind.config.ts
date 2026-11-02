@@ -34,13 +34,13 @@ const config: Config = {
         "indigo-text": "var(--indigo-text)",
       },
       fontFamily: {
-        sans: ["var(--font-inter)", "ui-sans-serif", "system-ui", "sans-serif"],
-        mono: ["var(--font-jetbrains-mono)", "ui-monospace", "SFMono-Regular", "monospace"],
+        sans: ["Trebuchet MS", "Lucida Sans Unicode", "sans-serif"],
+        mono: ["ui-monospace", "SFMono-Regular", "monospace"],
       },
       borderRadius: {
-        panel: "28px",
-        card: "20px",
-        control: "12px",
+        panel: "6px",
+        card: "4px",
+        control: "4px",
         /*
          * Pills (badges, arena IDs, stat captions) are used with `rounded-pill`
          * across a dozen components. Without this entry the class emits no CSS

@@ -234,14 +234,14 @@ for (const row of allCommands) {
 }
 
 // --- Server facts ---
-expect("server host", SERVER_ADDRESS_BARE, "theysix.sparked.network");
+expect("server host", SERVER_ADDRESS_BARE, "play.theysix.tech");
 expect("server port", SERVER_PORT, 25625);
-expect("server address", SERVER_ADDRESS, "theysix.sparked.network:25625");
-expect("max players", MAX_PLAYERS, 100);
+expect("server address", SERVER_ADDRESS, "play.theysix.tech:25625");
+expect("max players", MAX_PLAYERS, 999);
 
 // --- Spelling traps ---
 const wholeSite = readAllText();
-for (const trap of ["sparked.host", "sarked"]) {
+for (const trap of ["sparked.host", "sparked.network", "sarked"]) {
   if (wholeSite.includes(trap)) {
     failures.push(`forbidden domain spelling present: ${trap}`);
   }

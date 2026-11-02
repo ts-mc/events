@@ -20,6 +20,11 @@ import { Reveal } from "@/components/Reveal";
 import { COMMAND_GROUPS } from "@/data/commands";
 import {
   DISCORD_URL,
+  BEDROCK_HOST,
+  BEDROCK_PORT,
+  DISCORD_VERIFICATION_BOT_ID,
+  DISCORD_VERIFICATION_NAME,
+  DISCORD_VERIFICATION_URL,
   GAME_COUNT,
   JAVA_VERSION,
   MIN_CLIENT,
@@ -50,7 +55,10 @@ export default function HowToPlayPage() {
         }
         description="Everything you need to get into an arena, what the lobby expects from you, and every command you can use once you are in."
       >
-        <CopyValue value={SERVER_ADDRESS} asBlock />
+        <div className="grid gap-3 sm:grid-cols-2">
+          <CopyValue value={SERVER_ADDRESS_BARE} label="Copy Java address" asBlock />
+          <CopyValue value={`${BEDROCK_HOST}:${BEDROCK_PORT}`} label="Copy Bedrock address" asBlock />
+        </div>
       </PageHero>
 
       <PageShell>
@@ -65,16 +73,19 @@ export default function HowToPlayPage() {
           </h2>
           <Prose>
             <ProseP>
-              The server address is{" "}
+              The Java server address is{" "}
               <code className="font-mono font-bold text-brand-hi">
                 {SERVER_ADDRESS_BARE}
               </code>
-              . Most clients only need the address, so add it as a server in
-              your multiplayer list and you are done. If your client asks for a
-              port as well, use{" "}
+              . Java clients can add this host directly. Bedrock players should
+              add{" "}
+              <code className="font-mono font-bold text-brand-hi">{BEDROCK_HOST}</code>
+              {" "}with port{" "}
+              <code className="font-mono font-bold text-brand-hi">{BEDROCK_PORT}</code>.
+              If Java asks for a port, use{" "}
               <code className="font-mono font-bold text-brand-hi">
-                {SERVER_ADDRESS}
-              </code> &mdash; that is port {SERVER_PORT}.
+                {SERVER_PORT}
+              </code>.
             </ProseP>
             <ProseP>
               The server runs {SERVER_SOFTWARE} {SERVER_VERSION} and wants{" "}
@@ -83,8 +94,8 @@ export default function HowToPlayPage() {
             </ProseP>
           </Prose>
 
-          <div className="mt-8 grid gap-4 sm:grid-cols-2">
-            <div className="glass rounded-card p-6">
+          <div className="mt-8 divide-y divide-hairline border-y border-hairline">
+            <div className="py-5">
               <Coffee size={20} aria-hidden className="text-sky" />
               <h3 className="mt-4 text-lg font-extrabold text-ink">
                 Java Edition
@@ -97,18 +108,35 @@ export default function HowToPlayPage() {
                 </ProseP>
               </Prose>
             </div>
-            <div className="glass rounded-card p-6">
+            <div className="py-5">
               <Tablet size={20} aria-hidden className="text-teal" />
               <h3 className="mt-4 text-lg font-extrabold text-ink">
                 Bedrock Edition
               </h3>
               <Prose>
                 <ProseP>
-                  Phone, console, tablet and Windows Bedrock all work. Add the
-                  same address; the game handles the translation for you.
+                  Phone, console, tablet and Windows Bedrock all work. Add{" "}
+                  <strong>{BEDROCK_HOST}</strong> with port{" "}
+                  <strong>{BEDROCK_PORT}</strong>.
                 </ProseP>
               </Prose>
             </div>
+          </div>
+
+          <div className="mt-4 rounded-card border border-brand/30 bg-brand/5 p-5">
+            <p className="label-mono text-brand">Discord verification required</p>
+            <p className="mt-2 text-sm leading-relaxed text-ink-muted">
+              When you try to join the server, you will receive a four-digit
+              verification code. Direct message the bot{" "}
+              <strong className="text-ink">the verification bot</strong> on
+              Discord and send it that code to finish verification.
+            </p>
+            <p className="mt-3 text-sm">
+              <a className="font-semibold text-brand-hi underline underline-offset-4" href={DISCORD_VERIFICATION_URL} target="_blank" rel="noopener noreferrer">
+                Message {DISCORD_VERIFICATION_NAME} on Discord
+              </a>
+              <span className="sr-only"> (user ID {DISCORD_VERIFICATION_BOT_ID})</span>
+            </p>
           </div>
 
           <div className="mt-4">
@@ -332,12 +360,6 @@ export default function HowToPlayPage() {
               </Bullet>
               <Bullet>
                 <code className="font-mono font-bold text-brand-hi">
-                  /glow &lt;colour&gt;
-                </code>{" "}
-                &mdash; the outline glow around your character
-              </Bullet>
-              <Bullet>
-                <code className="font-mono font-bold text-brand-hi">
                   /cosmetics
                 </code>{" "}
                 &mdash; everything you own
@@ -374,8 +396,8 @@ export default function HowToPlayPage() {
               confusion on this server.
             </ProseP>
           </Prose>
-          <div className="mt-6 grid gap-4 sm:grid-cols-2">
-            <div className="glass rounded-card p-6">
+          <div className="mt-6 divide-y divide-hairline border-y border-hairline">
+            <div className="py-5">
               <Trophy size={20} aria-hidden className="text-magenta" />
               <h3 className="mt-4 text-base font-extrabold text-ink">
                 In-arena vote &mdash; live now
@@ -390,19 +412,16 @@ export default function HowToPlayPage() {
                 </ProseP>
               </Prose>
             </div>
-            <div className="glass rounded-card p-6">
+            <div className="py-5">
               <Wallet size={20} aria-hidden className="text-ink-muted" />
               <h3 className="mt-4 text-base font-extrabold text-ink">
-                Server-list vote &mdash; being rolled out
+                Server-list voting
               </h3>
               <Prose>
                 <ProseP>
-                  <code className="font-mono font-bold text-brand-hi">
-                    /vote
-                  </code>{" "}
-                  registers your vote on a Minecraft server directory. This is
-                  still being set up. We are not announcing a reward schedule
-                  until it is live and tested.
+                  Open the <TextLink href="/vote">voting links</TextLink> to
+                  choose a Minecraft server directory. This is separate from
+                  voting for the next minigame. The in-game <code className="font-mono font-bold text-brand-hi">/vote</code> command and any rewards depend on the server setup.
                 </ProseP>
               </Prose>
             </div>
@@ -494,7 +513,7 @@ function faqJsonLd() {
         name: "What is the server address for TheySix Events?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: `Add ${SERVER_ADDRESS_BARE} to your multiplayer list. If your client asks for a port, use ${SERVER_ADDRESS} (port ${SERVER_PORT}).`,
+          text: `Java: add ${SERVER_ADDRESS_BARE} (port ${SERVER_PORT}). Bedrock: add ${BEDROCK_HOST} with port ${BEDROCK_PORT}. When prompted on first join, DM the four-digit code to Discord bot ${DISCORD_VERIFICATION_BOT_ID}.`,
         },
       },
       {
@@ -502,7 +521,7 @@ function faqJsonLd() {
         name: "Can I play on Bedrock Edition?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "Yes. Java and Bedrock connect to the same address, and the server handles the translation between them.",
+          text: `Yes. Java uses ${SERVER_ADDRESS_BARE}; Bedrock uses ${BEDROCK_HOST} on port ${BEDROCK_PORT}.`,
         },
       },
       {
@@ -526,7 +545,7 @@ function faqJsonLd() {
         name: "What is the difference between /ts vote and /vote?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "/ts vote chooses the next minigame in the lobby and is always available. /vote registers a vote for the server on a Minecraft server directory and is still being rolled out.",
+          text: "/ts vote chooses the next minigame in the lobby. Server-list voting happens through the links on this website's /vote page; the in-game /vote command is separate.",
         },
       },
     ],

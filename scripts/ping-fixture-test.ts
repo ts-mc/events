@@ -25,7 +25,7 @@ const MOTD =
 const statusPayload = Buffer.from(
   JSON.stringify({
     version: { name: "1.21.11", protocol: 774 },
-    players: { online: 37, max: 100, sample: [] },
+    players: { online: 37, max: 999, sample: [] },
     description: { text: MOTD },
     enforcesSecureChat: true,
   }),

@@ -25,13 +25,9 @@ export function ServerBadge() {
 
   return (
     <p
-      className={`label-mono inline-flex items-center gap-2.5 rounded-pill border px-3.5 py-2 ${statusDotClass(
+      className={`label-mono inline-flex flex-wrap items-center gap-2.5 ${statusDotClass(
         status,
       )}`}
-      style={{
-        borderColor: "var(--border)",
-        backgroundColor: "var(--surface)",
-      }}
     >
       <StatusDot state={state} />
       <span className="text-ink-muted">{statusLabel(status)}</span>
@@ -60,9 +56,8 @@ export function StatStrip() {
   const { status } = useLiveStatus();
 
   return (
-    <div className="border-b border-hairline bg-bg/60">
-      <div className="shell">
-        <dl className="grid grid-cols-2 divide-hairline border-t border-hairline md:grid-cols-4 md:divide-x">
+    <div className="shell">
+        <dl className="grid grid-cols-2 divide-hairline border-y border-hairline md:grid-cols-4 md:divide-x">
           <div className="border-b border-hairline md:border-b-0">
             <StatTile
               icon={CircleDot}
@@ -93,7 +88,7 @@ export function StatStrip() {
               label="Arenas"
               color="var(--violet)"
               value={ARENA_COUNT}
-              detail="24 players each"
+              detail="24 players per arena"
             />
           </div>
           <div>
@@ -106,7 +101,6 @@ export function StatStrip() {
             />
           </div>
         </dl>
-      </div>
     </div>
   );
 }

@@ -7,7 +7,7 @@ export default function manifest(): MetadataRoute.Manifest {
     name: `${SERVER_NAME} — Minecraft minigames`,
     short_name: "TheySix Events",
     description:
-      "19 Minecraft minigames across 6 arenas on one server. Java and Bedrock, theysix.sparked.network.",
+      "19 Minecraft minigames across 6 arenas. Java: play.theysix.tech. Bedrock: bedrock.theysix.tech:25832.",
     start_url: "/",
     scope: "/",
     display: "standalone",

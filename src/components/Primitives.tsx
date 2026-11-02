@@ -57,27 +57,17 @@ export function PageHero({
   children?: ReactNode;
 }) {
   return (
-    <div className="relative isolate overflow-hidden border-b border-hairline bg-bg-elev/40">
-      <span
-        aria-hidden
-        className="glow-orb -left-24 -top-28"
-        style={{ width: 340, height: 340, background: "var(--brand)", opacity: 0.11 }}
-      />
-      <span
-        aria-hidden
-        className="glow-orb -right-16 top-8"
-        style={{ width: 260, height: 260, background: "var(--violet)", opacity: 0.09 }}
-      />
-      <div className="shell relative py-14 sm:py-18 lg:py-20">
+    <div className="shell pt-16 sm:pt-24">
+      <header className="max-w-[760px] border-b border-hairline py-8 sm:py-12">
         <p className="label-mono text-brand">{eyebrow}</p>
-        <h1 className="mt-4 max-w-3xl text-[clamp(2rem,5.5vw,3.5rem)] leading-[1.05]">
+        <h1 className="mt-3 text-[clamp(2.8rem,7vw,6rem)] leading-[.94] tracking-[-.04em] text-[#fbffee]">
           {title}
         </h1>
-        <div className="mt-5 max-w-2xl text-base leading-relaxed text-ink-muted sm:text-lg">
+        <div className="mt-5 max-w-2xl text-[1.08rem] leading-[1.75] text-ink-muted">
           {description}
         </div>
         {children ? <div className="mt-8">{children}</div> : null}
-      </div>
+      </header>
     </div>
   );
 }
@@ -92,7 +82,7 @@ export function Prose({
   return (
     <div
       className={cn(
-        "max-w-3xl space-y-5 text-base leading-relaxed text-ink-muted",
+        "max-w-[720px] space-y-5 text-[1.02rem] leading-[1.82] text-ink",
         className,
       )}
     >
@@ -102,11 +92,11 @@ export function Prose({
 }
 
 export function ProseH2({ children }: { children: ReactNode }) {
-  return <h2 className="pt-4 text-2xl text-ink">{children}</h2>;
+  return <h2 className="pt-4 text-[1.7rem] leading-[1.15] text-[#fbffee]">{children}</h2>;
 }
 
 export function ProseH3({ children }: { children: ReactNode }) {
-  return <h3 className="pt-2 text-lg text-ink">{children}</h3>;
+  return <h3 className="pt-2 text-[1.25rem] text-[#fbffee]">{children}</h3>;
 }
 
 export function ProseP({ children }: { children: ReactNode }) {
@@ -156,7 +146,7 @@ export function Callout({
 }
 
 export function PageShell({ children }: { children: ReactNode }) {
-  return <div className="shell py-16 sm:py-20">{children}</div>;
+  return <div className="shell pt-12 pb-24 sm:pb-36">{children}</div>;
 }
 
 export function TextLink({

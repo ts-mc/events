@@ -25,8 +25,13 @@ import { LiveStatusPanel } from "@/components/LiveStatusPanel";
 import {
   ARENA_CAPACITY,
   ARENA_COUNT,
+  BEDROCK_HOST,
+  BEDROCK_PORT,
   DISCORD_BRIDGE_CHANNEL,
   DISCORD_URL,
+  DISCORD_VERIFICATION_BOT_ID,
+  DISCORD_VERIFICATION_NAME,
+  DISCORD_VERIFICATION_URL,
   GAME_COUNT,
   JAVA_VERSION,
   MAX_PLAYERS,
@@ -34,6 +39,7 @@ import {
   MOTD_PLAIN,
   MOTD_RAW,
   SERVER_ADDRESS,
+  SERVER_ADDRESS_BARE,
   SERVER_SOFTWARE,
   SERVER_VERSION,
   SITE_URL,
@@ -62,7 +68,7 @@ export default function ServerPage() {
       <PageShell>
         <JsonLd data={softwareJsonLd()} />
 
-        <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_20rem] lg:items-start">
+        <div className="grid gap-12 lg:grid-cols-[minmax(0,720px)_240px] lg:justify-center lg:items-start">
           <div className="space-y-16">
             <section aria-labelledby="live">
               <h2
@@ -91,7 +97,7 @@ export default function ServerPage() {
               >
                 Core details
               </h2>
-              <dl className="mt-6 grid gap-4 sm:grid-cols-2">
+              <dl className="mt-6 border-t border-hairline">
                 <Spec
                   icon={Server}
                   label="Server software"
@@ -106,7 +112,7 @@ export default function ServerPage() {
                 <Spec
                   icon={MessageCircle}
                   label="Cross-play"
-                  value="Java and Bedrock, same address"
+                  value={`Java + Bedrock · ${BEDROCK_HOST}:${BEDROCK_PORT}`}
                 />
                 <Spec
                   icon={Grid3x3}
@@ -157,12 +163,12 @@ export default function ServerPage() {
               >
                 What else is in the server
               </h2>
-              <ul className="mt-6 grid gap-4 sm:grid-cols-2">
+              <ul className="mt-6 divide-y divide-hairline border-y border-hairline">
                 <Feature
                   icon={Sparkles}
                   color="var(--magenta)"
                   title="Cosmetics"
-                  body="Glow outlines, chat tags and other appearance-only items, bought with in-game credits in /ts store."
+                  body="Chat tags and other appearance-only items, bought with in-game credits in /ts store."
                 />
                 <Feature
                   icon={MessageCircle}
@@ -227,20 +233,27 @@ export default function ServerPage() {
               >
                 Address
               </h2>
-              <div className="mt-6 max-w-xl">
-                <CopyValue value={SERVER_ADDRESS} asBlock />
+              <div className="mt-6 grid max-w-2xl gap-3 sm:grid-cols-2">
+                <CopyValue value={SERVER_ADDRESS} label="Copy Java address" asBlock />
+                <CopyValue value={`${BEDROCK_HOST}:${BEDROCK_PORT}`} label="Copy Bedrock IP" asBlock />
               </div>
               <Prose className="mt-6">
                 <ProseList>
                   <Bullet>
-                    Java and Bedrock both use this same address. Add{" "}
+                    Java players add{" "}
                     <code className="font-mono font-bold text-brand-hi">
-                      theysix.sparked.network
+                      {SERVER_ADDRESS_BARE}
                     </code>{" "}
-                    in your multiplayer list and you are done.
+                    in their multiplayer list.
                   </Bullet>
                   <Bullet>
-                    If your client insists on a port, it is included above as{" "}
+                    Bedrock players use{" "}
+                    <code className="font-mono font-bold text-brand-hi">{BEDROCK_HOST}</code>
+                    {" "}on port{" "}
+                    <code className="font-mono font-bold text-brand-hi">{BEDROCK_PORT}</code>.
+                  </Bullet>
+                  <Bullet>
+                    Java clients can optionally specify the configured port as{" "}
                     <code className="font-mono font-bold text-brand-hi">
                       {SERVER_ADDRESS}
                     </code>
@@ -248,10 +261,18 @@ export default function ServerPage() {
                   </Bullet>
                 </ProseList>
               </Prose>
+              <Callout tone="brand" title="Discord verification">
+                On your first join, the server gives you a four-digit code.
+                Direct message{" "}
+                <a href={DISCORD_VERIFICATION_URL} target="_blank" rel="noopener noreferrer" className="font-bold text-brand underline underline-offset-4">
+                  {DISCORD_VERIFICATION_NAME}
+                </a>{" "}
+                with that code to verify and continue.
+              </Callout>
             </section>
           </div>
 
-          <aside className="glass rounded-card p-6 lg:sticky lg:top-28">
+          <aside className="border-l border-hairline pl-5 lg:sticky lg:top-8">
             <h2 className="label-mono text-brand">Quick facts</h2>
             <dl className="mt-5 space-y-4 text-sm">
               {[
@@ -262,6 +283,9 @@ export default function ServerPage() {
                 ["Arenas", String(ARENA_COUNT)],
                 ["Per arena", `${ARENA_CAPACITY} players`],
                 ["Max players", String(MAX_PLAYERS)],
+                ["Java address", SERVER_ADDRESS],
+                ["Bedrock address", `${BEDROCK_HOST}:${BEDROCK_PORT}`],
+                ["Verification bot", DISCORD_VERIFICATION_BOT_ID],
                 ["Online mode", "On"],
                 ["Website", "events-theysix.ro-mihaiu.xyz"],
               ].map(([label, value]) => (
@@ -301,7 +325,7 @@ function Spec({
   value: string;
 }) {
   return (
-    <div className="glass rounded-card p-5">
+    <div className="border-b border-hairline py-4">
       <dt className="label-mono flex items-center gap-2 text-ink-muted">
         <Icon size={15} aria-hidden className="text-brand" />
         {label}
@@ -323,7 +347,7 @@ function Feature({
   body: string;
 }) {
   return (
-    <li className="glass glass-hover card-hue rounded-card p-5" style={{ ["--card-hue" as string]: color }}>
+    <li className="py-5">
       <Icon size={20} aria-hidden style={{ color }} />
       <h3 className="mt-4 text-base font-extrabold text-ink">{title}</h3>
       <p className="mt-2 text-sm leading-relaxed text-ink-muted">{body}</p>

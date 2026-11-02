@@ -35,3 +35,6 @@ yarn-error.log*
 
 # vercel
 .vercel
+
+# Repository-specific agent notes are local working context.
+/AGENTS.md

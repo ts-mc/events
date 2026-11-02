@@ -8,6 +8,7 @@ import {
   type StatusClient,
 } from "@/lib/status-client";
 import { cn } from "@/lib/utils";
+import { MAX_PLAYERS } from "@/data/site";
 
 export type LiveStatus = StatusClient | "loading";
 
@@ -41,7 +42,7 @@ export function useLiveStatus(): { status: LiveStatus; refresh: () => void } {
     } catch (error) {
       if ((error as Error).name === "AbortError") return;
       // An honest unknown state. Never a zero, never a stale number.
-      setStatus({ online: null, max: 100, version: null, state: "unknown" });
+      setStatus({ online: null, max: MAX_PLAYERS, version: null, state: "unknown" });
     }
   }, []);
 

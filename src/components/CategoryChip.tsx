@@ -18,14 +18,11 @@ export function CategoryChip({
   return (
     <span
       className={cn(
-        "label-mono inline-flex items-center gap-1.5 rounded-pill px-2.5 py-1",
-        "border",
+        "label-mono inline-flex items-center gap-1.5 text-ink-muted",
         className,
       )}
       style={{
-        color: meta.color,
-        borderColor: `color-mix(in srgb, ${meta.color} 40%, transparent)`,
-        backgroundColor: `color-mix(in srgb, ${meta.color} 12%, transparent)`,
+        color: "var(--text-muted)",
       }}
     >
       <span

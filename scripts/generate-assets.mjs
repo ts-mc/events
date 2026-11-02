@@ -166,12 +166,12 @@ function ogSvg(logoUri) {
   <text x="72" y="392" font-family="${INTER_DISPLAY}" font-size="88" font-weight="800" letter-spacing="-3" fill="${TEXT}">6 ARENAS. ONE SERVER.</text>
 
   <!-- Subline -->
-  <text x="72" y="470" font-family="${INTER_MEDIUM}" font-size="34" font-weight="500" fill="${TEXT_MUTED}">Java and Bedrock · Paper 1.21.11 · 100 players</text>
+  <text x="72" y="470" font-family="${INTER_MEDIUM}" font-size="34" font-weight="500" fill="${TEXT_MUTED}">Java + Bedrock · Paper 1.21.11 · 999 players</text>
 
   <!-- Address bar -->
   <rect x="72" y="510" width="560" height="76" rx="20" fill="#111726" fill-opacity="0.9" stroke="${BRAND}" stroke-opacity="0.45" stroke-width="2"/>
   <text x="104" y="544" font-family="${MONO}" font-size="15" font-weight="700" letter-spacing="2.2" fill="${TEXT_MUTED}">SERVER ADDRESS</text>
-  <text x="104" y="572" font-family="${MONO}" font-size="24" font-weight="700" fill="${BRAND_HI}">theysix.sparked.network:25625</text>
+  <text x="104" y="572" font-family="${MONO}" font-size="24" font-weight="700" fill="${BRAND_HI}">play.theysix.tech:25625</text>
 
   <!-- Domain -->
   <text x="${width - 72}" y="572" font-family="${MONO}" font-size="20" font-weight="700" letter-spacing="1.4" fill="${TEXT_MUTED}" text-anchor="end">events-theysix.ro-mihaiu.xyz</text>

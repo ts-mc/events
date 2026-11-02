@@ -3,9 +3,7 @@ import type { Metadata } from "next";
 
 import { Button } from "@/components/Button";
 import { CopyValue } from "@/components/CopyValue";
-import { GlowOrb } from "@/components/Hero";
 import { JsonLd } from "@/components/JsonLd";
-import { Reveal } from "@/components/Reveal";
 import { ServerBadge, StatStrip } from "@/components/StatStrip";
 import { GameExplorer } from "@/components/GameExplorer";
 import { Callout, PageShell } from "@/components/Primitives";
@@ -15,6 +13,8 @@ import { Section } from "@/components/Section";
 import { ARENAS } from "@/data/arenas";
 import {
   ARENA_COUNT,
+  BEDROCK_HOST,
+  BEDROCK_PORT,
   BUSINESS_EMAIL,
   DISCORD_URL,
   GAME_COUNT,
@@ -30,7 +30,7 @@ import { RULES } from "@/data/rules";
 
 export const metadata: Metadata = {
   title: `${SERVER_NAME} — ${GAME_COUNT} Minecraft minigames, ${ARENA_COUNT} arenas`,
-  description: `A Minecraft minigame server with ${GAME_COUNT} games across ${ARENA_COUNT} arenas. Join on theysix.sparked.network from Java or Bedrock, clients ${MIN_CLIENT} and newer.`,
+  description: `A Minecraft minigame server with ${GAME_COUNT} games across ${ARENA_COUNT} arenas. Join at play.theysix.tech from Java or ${BEDROCK_HOST} on Bedrock, clients ${MIN_CLIENT} and newer.`,
   alternates: { canonical: "/" },
 };
 
@@ -39,13 +39,15 @@ export default function HomePage() {
     <>
       <JsonLd data={websiteJsonLd()} />
       <JsonLd data={serverJsonLd()} />
-      <Hero />
-      <StatStrip />
-      <GamesSection />
-      <ArenasSection />
-      <HowToPlaySection />
-      <RanksSection />
-      <RulesSection />
+      <div className="events-archive">
+        <Hero />
+        <StatStrip />
+        <GamesSection />
+        <ArenasSection />
+        <HowToPlaySection />
+        <RanksSection />
+        <RulesSection />
+      </div>
     </>
   );
 }
@@ -95,61 +97,42 @@ function serverJsonLd() {
 
 function Hero() {
   return (
-    <div className="relative isolate overflow-hidden border-b border-hairline">
-      <GlowOrb color="var(--brand)" className="-left-28 -top-36" opacity={0.13} />
-      <GlowOrb
-        color="var(--violet)"
-        className="-right-24 top-16"
-        size={340}
-        opacity={0.11}
-      />
-      <GlowOrb
-        color="var(--sky)"
-        className="bottom-[-12rem] left-1/3 hidden md:block"
-        size={320}
-        opacity={0.09}
-      />
+    <header className="shell pt-16 sm:pt-24">
+      <div className="max-w-[760px] pt-8 pb-12 sm:pt-12 sm:pb-20">
+        <ServerBadge />
+        <h1 className="mt-5 text-[clamp(2.8rem,7vw,6rem)] leading-[.94] tracking-[-.04em]">
+          <span className="text-gradient">19 MINIGAMES.</span>
+          <br />
+          6 ARENAS. ONE SERVER.
+        </h1>
+        <p className="mt-5 max-w-[45rem] text-[1.08rem] leading-[1.75] text-ink-muted">
+          {SERVER_NAME} is a Minecraft minigame server where every round is a
+          short, loud fight. Race the clock, duel a friend, or vote for what
+          the lobby plays next. Java and Bedrock connect through separate addresses.
+        </p>
 
-      <div className="shell relative py-16 sm:py-24 lg:py-28">
-        <Reveal>
-          <ServerBadge />
-          <h1 className="mt-6 max-w-4xl text-[clamp(2.25rem,7vw,4.5rem)] leading-[1.02]">
-            <span className="text-gradient">19 MINIGAMES.</span>
-            <br />
-            6 ARENAS. ONE SERVER.
-          </h1>
-          <p className="mt-6 max-w-2xl text-base leading-relaxed text-ink-muted sm:text-lg">
-            {SERVER_NAME} is a Minecraft minigame server where every round is a
-            short, loud fight. Race the clock, duel a friend, or vote for what
-            the lobby plays next. Java and Bedrock play on the same address.
-          </p>
+        <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+          <CopyValue value="play.theysix.tech:25625" label="Copy Java server address" size="lg" />
+          <Button href={DISCORD_URL} variant="secondary" size="lg">Join the Discord</Button>
+          <Button href="#games" variant="ghost" size="lg">
+            Browse the games
+            <ArrowRight size={18} aria-hidden />
+          </Button>
+        </div>
 
-          <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
-            <CopyValue value="theysix.sparked.network" label="Copy theysix.sparked.network" size="lg" />
-            <Button href={DISCORD_URL} variant="secondary" size="lg">
-              Join the Discord
-            </Button>
-            <Button href="#games" variant="ghost" size="lg">
-              Browse the games
-              <ArrowRight size={18} aria-hidden />
-            </Button>
-          </div>
-
-          <p className="mt-6 font-mono text-xs text-ink-muted">
-            Add <span className="text-brand">theysix.sparked.network</span> as a
-            server, or paste{" "}
-            <span className="text-brand">theysix.sparked.network:25625</span> if
-            your client asks for a port.
-          </p>
-        </Reveal>
+        <p className="mt-6 font-mono text-xs text-ink-muted">
+          Java: <span className="text-brand">play.theysix.tech:25625</span>. Bedrock:{" "}
+          <span className="text-brand">{BEDROCK_HOST}</span>, port{" "}
+          <span className="text-brand">{BEDROCK_PORT}</span>.
+        </p>
       </div>
-    </div>
+    </header>
   );
 }
 
 function GamesSection() {
   return (
-    <div className="border-b border-hairline">
+    <div className="events-section">
       <PageShell>
         <Section
           id="games"
@@ -160,7 +143,7 @@ function GamesSection() {
               <span className="text-gradient">Pick your poison.</span>
             </>
           }
-          description="Search by name or filter by category. Every card shows the round length, how you win, and the exact command to join."
+          description="Search by name or filter by category. Each entry shows the round length, how you win, and the exact command to join."
         >
           <GameExplorer />
         </Section>
@@ -171,7 +154,7 @@ function GamesSection() {
 
 function ArenasSection() {
   return (
-    <div className="border-b border-hairline bg-bg/60">
+    <div className="events-section">
       <PageShell>
         <Section
           id="arenas"
@@ -182,13 +165,11 @@ function ArenasSection() {
               <span className="text-gradient">its own colour.</span>
             </>
           }
-          description="Every arena holds up to 24 players. Team size is worked out when the round starts, from however many players turned up."
+          description="The server supports up to 999 players. Team size is worked out when each round starts, from however many players turned up."
         >
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {ARENAS.map((arena) => (
-              <ArenaCard key={arena.id} arena={arena} />
-            ))}
-          </div>
+          <ul className="events-index">
+            {ARENAS.map((arena) => <li key={arena.id}><ArenaCard arena={arena} /></li>)}
+          </ul>
         </Section>
       </PageShell>
     </div>
@@ -197,7 +178,7 @@ function ArenasSection() {
 
 function HowToPlaySection() {
   return (
-    <div className="border-b border-hairline">
+    <div className="events-section">
       <PageShell>
         <Section
           id="how-to-play"
@@ -215,33 +196,13 @@ function HowToPlaySection() {
             </>
           }
         >
-          <ol className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+          <ol className="events-index">
             {HOW_TO_PLAY_STEPS.map((step, index) => (
               <li key={step.title}>
-                <Reveal stagger>
-                  <div
-                    data-reveal-child
-                    className="glass glass-hover card-hue flex h-full flex-col rounded-card p-6"
-                    style={{ ["--card-hue" as string]: step.hue }}
-                  >
-                    <span
-                      className="label-mono inline-flex size-9 items-center justify-center rounded-[10px]"
-                      style={{
-                        color: step.hue,
-                        backgroundColor: `color-mix(in srgb, ${step.hue} 14%, transparent)`,
-                        border: `1px solid color-mix(in srgb, ${step.hue} 30%, transparent)`,
-                      }}
-                    >
-                      {String(index + 1).padStart(2, "0")}
-                    </span>
-                    <h3 className="mt-4 text-lg font-extrabold text-ink">
-                      {step.title}
-                    </h3>
-                    <p className="mt-2 text-sm leading-relaxed text-ink-muted">
-                      {step.body}
-                    </p>
-                  </div>
-                </Reveal>
+                <div className="grid gap-2 sm:grid-cols-[3rem_minmax(0,1fr)] sm:gap-4">
+                  <span className="label-mono text-brand">{String(index + 1).padStart(2, "0")}</span>
+                  <div><h3 className="text-base font-bold text-brand">{step.title}</h3><p className="mt-1 text-sm leading-[1.55] text-ink-muted">{step.body}</p></div>
+                </div>
               </li>
             ))}
           </ol>
@@ -253,7 +214,7 @@ function HowToPlaySection() {
 
 function RanksSection() {
   return (
-    <div className="border-b border-hairline bg-bg/60">
+    <div className="events-section">
       <PageShell>
         <Section
           id="ranks"
@@ -284,7 +245,7 @@ function RanksSection() {
 
 function RulesSection() {
   return (
-    <div className="border-b border-hairline">
+    <div className="events-section">
       <PageShell>
         <Section
           id="rules"
@@ -297,25 +258,13 @@ function RulesSection() {
           }
           description="The short version. The full wording lives in the terms."
         >
-          <ol className="grid gap-4 md:grid-cols-2">
+          <ol className="events-index">
             {RULES.map((rule, index) => (
               <li key={rule.title}>
-                <Reveal stagger>
-                  <div
-                    data-reveal-child
-                    className="flex h-full gap-4 rounded-card border border-hairline bg-surface/50 p-5"
-                  >
-                    <span className="label-mono shrink-0 text-crimson">
-                      {String(index + 1).padStart(2, "0")}
-                    </span>
-                    <div>
-                      <h3 className="text-base font-bold text-ink">{rule.title}</h3>
-                      <p className="mt-1.5 text-sm leading-relaxed text-ink-muted">
-                        {rule.body}
-                      </p>
-                    </div>
-                  </div>
-                </Reveal>
+                <div className="grid gap-2 sm:grid-cols-[3rem_minmax(0,1fr)] sm:gap-4">
+                  <span className="label-mono text-brand">{String(index + 1).padStart(2, "0")}</span>
+                  <div><h3 className="text-base font-bold text-brand">{rule.title}</h3><p className="mt-1 text-sm leading-[1.55] text-ink-muted">{rule.body}</p></div>
+                </div>
               </li>
             ))}
           </ol>

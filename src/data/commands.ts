@@ -120,11 +120,6 @@ export const COMMAND_GROUPS: CommandGroup[] = [
         effect: "Chooses the tag shown next to your name in chat.",
       },
       {
-        command: "/glow <colour>",
-        who: "Everyone",
-        effect: "Sets the outline glow around your character.",
-      },
-      {
         command: "/cosmetics",
         who: "Everyone",
         effect: "Opens your cosmetics.",
@@ -143,7 +138,7 @@ export const COMMAND_GROUPS: CommandGroup[] = [
         command: "/vote",
         who: "Everyone",
         effect:
-          "Server-list voting on a Minecraft server directory. This is still being rolled out. It is separate from the in-arena vote.",
+          "Server-list voting on a Minecraft server directory. See this website's /vote page for links. It is separate from the in-arena vote.",
       },
     ],
   },

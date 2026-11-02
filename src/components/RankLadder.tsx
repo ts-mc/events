@@ -43,11 +43,11 @@ export function RankGradientName({
 
 export function RankLadder({ compact = false }: { compact?: boolean }) {
   return (
-    <ol className="space-y-3">
+    <ol className="events-index">
       {RANKS.map((rank, index) => (
         <li key={rank.name}>
           <div
-            className="glass glass-hover card-hue flex flex-col gap-4 rounded-card p-5 sm:flex-row sm:items-center sm:gap-6"
+            className="glass-hover card-hue flex flex-col gap-4 p-4 sm:flex-row sm:items-center sm:gap-6"
             style={{
               ["--card-hue" as string]: rank.gradient[rank.gradient.length - 1],
             }}
@@ -101,11 +101,11 @@ export function RankLadder({ compact = false }: { compact?: boolean }) {
  */
 export function RankTeaser() {
   return (
-    <ul className="grid gap-3 sm:grid-cols-2">
+    <ul className="events-index">
       {RANKS.map((rank) => (
         <li
           key={rank.name}
-          className="flex items-center gap-3 rounded-control border border-hairline bg-surface/50 px-4 py-3"
+          className="flex flex-wrap items-center gap-3 px-4 py-3"
         >
           <span
             aria-hidden
@@ -128,7 +128,7 @@ export function RankTeaser() {
 
 export function RankStaffNote() {
   return (
-    <div className="glass rounded-card p-6">
+    <div className="border-t border-hairline pt-5">
       <h2 className="label-mono text-brand">Applying to the staff team</h2>
       <p className="mt-3 text-sm leading-relaxed text-ink-muted">
         Staff applications open periodically. When they are open, the

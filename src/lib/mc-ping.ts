@@ -7,8 +7,10 @@
 
 const PROTOCOL_VERSION = -1; // Any version: the status response does not gate on it.
 
-const HANDSHAKE_HOST = "theysix.sparked.network";
-const HANDSHAKE_PORT = 25625;
+import { SERVER_HOST, SERVER_PORT } from "@/data/site";
+
+const HANDSHAKE_HOST = SERVER_HOST;
+const HANDSHAKE_PORT = SERVER_PORT;
 
 export type PingResult = {
   /** null means the ping failed, which is not the same as zero players. */

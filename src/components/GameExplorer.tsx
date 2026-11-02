@@ -102,7 +102,7 @@ export function GameExplorer({ games = GAMES }: { games?: Game[] }) {
                 onClick={() => selectFilter(item.slug)}
                 aria-pressed={active}
                 className={cn(
-                  "label-mono rounded-pill border px-4 py-2.5 transition-all duration-200",
+                  "label-mono rounded-control border px-4 py-2.5 transition-colors duration-150",
                   active
                     ? "text-[#070A12]"
                     : "border-hairline text-ink-muted hover:border-hairline-hover hover:text-ink",
@@ -110,8 +110,8 @@ export function GameExplorer({ games = GAMES }: { games?: Game[] }) {
                 style={
                   active
                     ? {
-                        backgroundImage: `linear-gradient(100deg, ${item.color} 0%, color-mix(in srgb, ${item.color} 55%, var(--brand-hi)) 100%)`,
-                        borderColor: "transparent",
+                        backgroundColor: "var(--brand)",
+                        borderColor: "var(--brand)",
                       }
                     : undefined
                 }
@@ -137,7 +137,7 @@ export function GameExplorer({ games = GAMES }: { games?: Game[] }) {
             value={query}
             onChange={(event) => setQuery(event.target.value)}
             placeholder="Search 19 games"
-            className="h-12 w-full rounded-control border border-hairline bg-surface/70 pl-10 pr-10 text-sm text-ink placeholder:text-ink-muted transition-colors duration-200 focus:border-brand focus:bg-surface"
+            className="h-12 w-full rounded-control border border-hairline-hover bg-surface pl-10 pr-10 text-sm text-ink placeholder:text-ink-muted transition-colors duration-150 focus:border-brand"
           />
           {query ? (
             <button
@@ -164,11 +164,11 @@ export function GameExplorer({ games = GAMES }: { games?: Game[] }) {
       </p>
 
       {visible.length > 0 ? (
-        <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <ul className="events-index mt-6">
           {visible.map((game) => (
-            <GameCard key={game.id} game={game} />
+            <li key={game.id}><GameCard game={game} /></li>
           ))}
-        </div>
+        </ul>
       ) : (
         <div className="mt-6 rounded-card border border-dashed border-hairline bg-surface/40 p-10 text-center">
           <p className="text-base font-semibold text-ink">No games match that</p>

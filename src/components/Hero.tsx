@@ -23,7 +23,7 @@ export function GlowOrb({
         width: size,
         height: size,
         background: color,
-        opacity,
+        opacity: opacity * 0.35,
       }}
     />
   );

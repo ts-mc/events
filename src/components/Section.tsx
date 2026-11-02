@@ -22,19 +22,18 @@ export function Section({
 }: SectionProps) {
   return (
     <section id={id} className={className} aria-labelledby={`${id}-heading`}>
-      <p className="label-mono text-brand">{eyebrow}</p>
-      <Heading
-        id={`${id}-heading`}
-        className="mt-3 text-[clamp(1.75rem,4vw,2.5rem)] leading-[1.08]"
-      >
-        {title}
-      </Heading>
+      <div className="flex flex-wrap items-baseline justify-between gap-x-8 gap-y-2 border-b border-hairline pb-3">
+        <p className="label-mono text-brand">{eyebrow}</p>
+        <Heading id={`${id}-heading`} className="max-w-2xl text-[1.35rem] leading-[1.2] tracking-[-.02em] text-ink">
+          {title}
+        </Heading>
+      </div>
       {description ? (
-        <div className="mt-4 max-w-2xl text-base leading-relaxed text-ink-muted">
+        <div className="mt-4 max-w-[45rem] text-[1.02rem] leading-[1.75] text-ink-muted">
           {description}
         </div>
       ) : null}
-      <div className="mt-10">{children}</div>
+      <div className="mt-8">{children}</div>
     </section>
   );
 }

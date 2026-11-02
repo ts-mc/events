@@ -11,7 +11,6 @@ export function StatTile({
   icon: Icon,
   label,
   value,
-  color,
   detail,
   children,
 }: {
@@ -23,22 +22,17 @@ export function StatTile({
   children?: ReactNode;
 }) {
   return (
-    <div className="px-6 py-7 sm:px-7">
+    <div className="px-3 py-5 sm:px-5">
       <div className="flex items-center gap-2.5">
         <span
           aria-hidden
-          className="inline-flex size-8 items-center justify-center rounded-[10px]"
-          style={{
-            color,
-            backgroundColor: `color-mix(in srgb, ${color} 14%, transparent)`,
-            border: `1px solid color-mix(in srgb, ${color} 30%, transparent)`,
-          }}
+          className="inline-flex size-5 items-center justify-center text-brand"
         >
           <Icon size={16} />
         </span>
         <span className="label-mono text-ink-muted">{label}</span>
       </div>
-      <p className="mt-3 font-mono text-3xl font-extrabold tracking-tight text-ink">
+      <p className="mt-3 text-3xl font-black tracking-tight text-ink">
         {value}
       </p>
       {detail ? <p className="mt-1 text-sm text-ink-muted">{detail}</p> : null}

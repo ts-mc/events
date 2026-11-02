@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Inter, JetBrains_Mono } from "next/font/google";
 
 import { CookieBanner } from "@/components/CookieBanner";
 import { SiteFooter } from "@/components/SiteFooter";
@@ -8,25 +7,6 @@ import { SITE_URL } from "@/data/site";
 
 import "./globals.css";
 
-/**
- * Both families are loaded for real: the sibling site declares them in its
- * Tailwind theme but never fetches them, so everything silently falls back to
- * system-ui. `display: swap` is set so text paints immediately.
- */
-const inter = Inter({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-inter",
-  axes: ["opsz"],
-});
-
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-jetbrains-mono",
-  weight: ["400", "500", "700", "800"],
-});
-
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
@@ -34,7 +14,7 @@ export const metadata: Metadata = {
     template: "%s · TheySix Events",
   },
   description:
-    "TheySix Events is a Minecraft minigame server with 19 games across 6 arenas. Join on theysix.sparked.network with Java or Bedrock.",
+    "TheySix Events is a Minecraft minigame server with 19 games across 6 arenas. Join on play.theysix.tech (Java) or bedrock.theysix.tech:25832 (Bedrock).",
   applicationName: "TheySix Events",
   manifest: "/manifest.webmanifest",
   alternates: { canonical: "/" },
@@ -72,7 +52,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport = {
-  themeColor: "#070A12",
+  themeColor: "#020202",
   colorScheme: "dark",
 };
 
@@ -82,7 +62,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${inter.variable} ${jetbrainsMono.variable}`}>
+    <html lang="en">
       <body className="min-h-screen bg-bg-base text-ink antialiased">
         <a
           href="#main"

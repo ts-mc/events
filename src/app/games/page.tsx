@@ -30,7 +30,7 @@ export default function GamesPage() {
         </Reveal>
       </PageShell>
       <p className="sr-only">
-        Server address: theysix.sparked.network, port 25625. Site: {SITE_URL}
+        Java: play.theysix.tech. Bedrock: bedrock.theysix.tech:25832. Site: {SITE_URL}
       </p>
     </>
   );

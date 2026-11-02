@@ -7,12 +7,12 @@ export type Step = {
 export const HOW_TO_PLAY_STEPS: Step[] = [
   {
     title: "Add the server",
-    body: "Open your multiplayer list and add theysix.sparked.network. If your client insists on a port, use theysix.sparked.network:25625.",
+    body: "Open your multiplayer list and add play.theysix.tech. If your client insists on a port, use play.theysix.tech:25625.",
     hue: "var(--sky)",
   },
   {
     title: "Join with any recent client",
-    body: "Paper 1.21.11 runs the server, but anything from 1.9 upwards connects, on both Java and Bedrock. No special launcher needed.",
+    body: "Java clients from 1.9 upwards connect. Bedrock works on phone, console, tablet and Windows using its separate address and port.",
     hue: "var(--teal)",
   },
   {
