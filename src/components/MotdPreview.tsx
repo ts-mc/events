@@ -26,11 +26,6 @@ const motds = [
   },
   {
     top: "TheySix Events  >>  Pinata Party  [ 1.21.11+ ]",
-    games: ["ᴛʀᴀꜰꜰɪᴄ ʟɪɢʜᴛ", "ᴄʜᴀɪʀs", "ʀᴇᴅ ᴀʟᴇʀᴛ"],
-    offset: "      ",
-  },
-  {
-    top: "TheySix Events  >>  Pinata Party  [ 1.21.11+ ]",
     games: ["ᴍɪɴᴇꜰɪᴇʟᴅ", "ᴀʟʟ ᴀɢᴀɪɴsᴛ ᴀʟʟ", "ᴡᴀᴛᴇʀ ᴡᴇʟʟ"],
     offset: "      ",
   },
@@ -47,21 +42,6 @@ const motds = [
 ];
 
 const colors = ["#ec8c8c", "#ffc58b", "#ffff9e", "#9aff9a", "#97cff5"];
-
-function gradient(text: string, from: string, to: string) {
-  return `<gradient:${from}:${to}>${text}</gradient>`;
-}
-
-function rawMotd(motd: (typeof motds)[number]) {
-  const gameLine = motd.games
-    .map((game, index) => {
-      const from = colors[index];
-      const to = colors[index + 1] ?? colors[index];
-      return gradient(`${index ? "• " : ""}${game} `, from, to);
-    })
-    .join("");
-  return `line1="      <b><gradient:#4cadd0:#b2f9ff>TheySix Events</gradient></b> <gray>>></gray> <white>${motd.top.split("  >>  ")[1].split("  [")[0]}</white> <gray>[</gray><white>1.21.11+</white><gray>]</gray>"\nline2="${motd.offset}<b>${gameLine}</b>"\nicon=ts-64px`;
-}
 
 export function MotdPreview() {
   const [index, setIndex] = useState(0);
@@ -82,12 +62,22 @@ export function MotdPreview() {
         </div>
         <span className="ml-auto shrink-0 font-mono text-xs text-ink-muted">{index + 1} / {motds.length}</span>
       </div>
-      <div className="mt-4 overflow-x-auto rounded-control bg-[#101820] p-4 font-mono text-[11px] leading-6 sm:text-xs" aria-label={`Message variant ${index + 1} of ${motds.length}`}>
-        <p className="whitespace-pre">      <strong className="bg-gradient-to-r from-[#4cadd0] to-[#b2f9ff] bg-clip-text text-transparent">TheySix Events</strong> <span className="text-[#aaaaaa]">&gt;&gt;</span> <span className="text-white">{current.top.split("  >>  ")[1].split("  [")[0]}</span> <span className="text-[#aaaaaa]">[</span><span className="text-white">1.21.11+</span><span className="text-[#aaaaaa]">]</span></p>
-        <p className="whitespace-pre">{current.offset}<strong>{current.games.map((game, gameIndex) => <span key={game} className="bg-gradient-to-r bg-clip-text text-transparent" style={{ backgroundImage: `linear-gradient(90deg, ${colors[gameIndex]}, ${colors[gameIndex + 1] ?? colors[gameIndex]})` }}>{gameIndex ? `• ${game} ` : `${game} `}</span>)}</strong></p>
+      <div
+        className="relative mt-4 overflow-x-auto border border-[#000000] bg-[#111111] p-4 font-mono text-[11px] leading-6 shadow-[inset_0_1px_0_#4d4d4d,inset_0_-1px_0_#000000] sm:text-xs"
+        aria-label={`Message variant ${index + 1} of ${motds.length}`}
+      >
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 opacity-90"
+          style={{
+            backgroundImage:
+              "linear-gradient(180deg, rgba(255,255,255,0.08) 0%, rgba(0,0,0,0.35) 100%), repeating-linear-gradient(0deg, rgba(255,255,255,0.035) 0px, rgba(255,255,255,0.035) 1px, transparent 1px, transparent 2px), repeating-linear-gradient(90deg, rgba(255,255,255,0.025) 0px, rgba(255,255,255,0.025) 1px, transparent 1px, transparent 2px)",
+          }}
+        />
+        <p className="relative whitespace-pre">      <strong className="bg-gradient-to-r from-[#4cadd0] to-[#b2f9ff] bg-clip-text text-transparent">TheySix Events</strong> <span className="text-[#aaaaaa]">&gt;&gt;</span> <span className="text-white">{current.top.split("  >>  ")[1].split("  [")[0]}</span> <span className="text-[#aaaaaa]">[</span><span className="text-white">1.21.11+</span><span className="text-[#aaaaaa]">]</span></p>
+        <p className="relative whitespace-pre">{current.offset}<strong>{current.games.map((game, gameIndex) => <span key={game} className="bg-gradient-to-r bg-clip-text text-transparent" style={{ backgroundImage: `linear-gradient(90deg, ${colors[gameIndex]}, ${colors[gameIndex + 1] ?? colors[gameIndex]})` }}>{gameIndex ? `• ${game} ` : `${game} `}</span>)}</strong></p>
       </div>
-      <p className="label-mono mt-5 text-ink-muted">MiniMessage configuration · changes every 7 seconds</p>
-      <pre className="mt-3 max-h-40 overflow-auto select-all whitespace-pre-wrap break-words rounded-control bg-bg-elev p-4 font-mono text-[11px] leading-relaxed text-ink-muted">{rawMotd(current)}</pre>
+      <p className="label-mono mt-5 text-ink-muted">Server list preview · changes every 7 seconds</p>
     </div>
   );
 }
