@@ -53,7 +53,7 @@ export function CookieBanner() {
             No analytics, no advertising, no tracking.
           </p>
           <Link
-            href="https://wiki.theysix.tech/legal/cookies"
+            href="https://wiki.theysix.tech/cookies"
             className="tap-target mt-1 inline-block text-sm font-medium text-brand underline-offset-4 hover:text-brand-hi hover:underline"
           >
             Read the cookie policy
